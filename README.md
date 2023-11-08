@@ -11,9 +11,6 @@ JudgeVis.cs :
 RederingManager.cs : 
 レンダリング解像度を調節するためのコード
 
-SampleRay.cs : 
-カードの認識判定にRayを使用するためのテストコード
-
 SensorConnect.cs : 
 ToFセンサから距離情報を取得し、カードの映像を投影するためのコード
 
