@@ -4,6 +4,7 @@ import random
 import time
 import serial
 
+# Hololensと接続が可能か最初にTCPで通信する関数
 def receive_tcp_start_signal():
     tcp_host = '127.0.0.1'
     tcp_port = 50001
@@ -22,6 +23,7 @@ def receive_tcp_start_signal():
                 print("success")
                 tcp_socket.close()
 
+# 得られた数値データ4マスの平均の値を求めて，距離に直す関数
 def average_and_distance(lu, ru, ld, rd):
     ave = (lu + ru + ld + rd) / 4
     distance = 0.004 * (ave ** 2) - 0.017 * ave
