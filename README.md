@@ -1,4 +1,8 @@
 # AR-CardGame
+【Assets】
+Spatial Awarenessについて変更した設定プロファイル
+
+【Scripts】
 AR Card Game で使用する Script
 
 DisplayPriority.cs : 
