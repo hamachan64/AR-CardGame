@@ -37,7 +37,6 @@ public class DisplayPriority : MonoBehaviour
             card2_mesh.enabled = false;
             card3_mesh.enabled = false;
             card4_mesh.enabled = false;
-            //Debug.Log("Card1, YES");
         }
         else
         {
@@ -46,7 +45,6 @@ public class DisplayPriority : MonoBehaviour
                 card2_mesh.enabled = true;
                 card3_mesh.enabled = false;
                 card4_mesh.enabled = false;
-                //Debug.Log("Card2, YES");
             }
             else
             {
@@ -54,20 +52,10 @@ public class DisplayPriority : MonoBehaviour
                 {
                     card3_mesh.enabled = true;
                     card4_mesh.enabled = false;
-                    //Debug.Log("Card3, YES");
                 }
                 else
                 {
                     card4_mesh.enabled = true;
-                    /*if (card4_mesh.isVisible)
-                    {
-                        card4_mesh.enabled = true;
-                        //Debug.Log("Card3, YES");
-                    }
-                    else
-                    {
-                        //Debug.Log("All Cards are imvisible.");
-                    }*/
                 }
             }
         }

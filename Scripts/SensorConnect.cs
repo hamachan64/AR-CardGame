@@ -11,41 +11,12 @@ using UnityEngine.SocialPlatforms;
 using static UnityEngine.GraphicsBuffer;
 using UnityEngine.InputSystem.HID;
 
-/*void TcpConnect()
-{
-    static string localIP = "127.0.0.1";
-    static int localPort = 50001;
-    static IPAddress localAddress = IPAddress.Parse(localIpString);
-    IPEndPoint localEP = new IPEndPoint(localAddress, localPort);
-
-    // ƒ\ƒPƒbƒg¶¬
-    Socket socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-    // Ú‘±
-    socket.Connect(localEP);
-    Debug.Log("Success, now connect!");
-
-    // ‘—M
-    var data = Encoding.UTF8.GetBytes("Start");
-    // “]‘—‚·‚éƒf[ƒ^‚Ì’·‚³‚ğbigƒGƒ“ƒfƒBƒAƒ“‚Å•ÏŠ·‚µ‚ÄƒT[ƒo‚Å‘—‚éB(4byte)
-    socket.Send(BitConverter.GetBytes(data.Length));
-    socket.Send(data);
-
-    //ƒ\ƒPƒbƒgI—¹
-    socket.Shutdown(SocketShutdown.Both);
-    socket.Close();
-}*/
-
 public class SensorConnect : MonoBehaviour
 {
     public GameObject hololens2;
     public GameObject tofCamera;
     //public GameObject[] card;
     public GameObject tofPic;
-    //Boolean tofKing;
-
-    //Vector3 direction = new Vector3(0, 0, 1); // X²•ûŒü‚ğ•\‚·ƒxƒNƒgƒ‹
-
 
     static string localIP = "127.0.0.1";
     static int localPort = 50001;
@@ -57,20 +28,20 @@ public class SensorConnect : MonoBehaviour
 
     void Start()
     {
-        // ƒ\ƒPƒbƒg¶¬
+        // ï¿½\ï¿½Pï¿½bï¿½gï¿½ï¿½ï¿½ï¿½
         Socket socket = new Socket(localAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
-        // Ú‘±
+        // ï¿½Ú‘ï¿½
         socket.Connect(localEP);
         Debug.Log("Success, now connect!");
 
-        // ‘—M
+        // ï¿½ï¿½ï¿½M
         var data = Encoding.UTF8.GetBytes("Start");
-        // “]‘—‚·‚éƒf[ƒ^‚Ì’·‚³‚ğbigƒGƒ“ƒfƒBƒAƒ“‚Å•ÏŠ·‚µ‚ÄƒT[ƒo‚Å‘—‚éB(4byte)
+        // ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½Ì’ï¿½ï¿½ï¿½ï¿½ï¿½bigï¿½Gï¿½ï¿½ï¿½fï¿½Bï¿½Aï¿½ï¿½ï¿½Å•ÏŠï¿½ï¿½ï¿½ï¿½ÄƒTï¿½[ï¿½oï¿½Å‘ï¿½ï¿½ï¿½B(4byte)
         socket.Send(BitConverter.GetBytes(data.Length));
         socket.Send(data);
 
-        //ƒ\ƒPƒbƒgI—¹
+        //ï¿½\ï¿½Pï¿½bï¿½gï¿½Iï¿½ï¿½
         socket.Shutdown(SocketShutdown.Both);
         socket.Close();
 
@@ -79,9 +50,6 @@ public class SensorConnect : MonoBehaviour
 
         udp = new UdpClient(LOCA_LPORT);
         udp.Client.ReceiveTimeout = 2000;
-
-        //tofKing = card[0].GetComponent<Renderer>().enabled;
-        //tofKing = false;
     }
 
     void Update()
@@ -91,32 +59,26 @@ public class SensorConnect : MonoBehaviour
         string text = Encoding.UTF8.GetString(data);
         Debug.Log(text);
 
-        Ray ray = new Ray(tofCamera.transform.position, tofCamera.transform.forward); // Ray‚ğ¶¬;
+        Ray ray = new Ray(tofCamera.transform.position, tofCamera.transform.forward); // Rayï¿½ğ¶ï¿½;
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit)) // ‚à‚µRay‚ğ“ŠË‚µ‚Ä‰½‚ç‚©‚ÌƒRƒ‰ƒCƒ_[‚ÉÕ“Ë‚µ‚½‚ç
+        if (Physics.Raycast(ray, out hit)) // ï¿½ï¿½ï¿½ï¿½Rayï¿½ğ“ŠË‚ï¿½ï¿½Ä‰ï¿½ï¿½ç‚©ï¿½ÌƒRï¿½ï¿½ï¿½Cï¿½_ï¿½[ï¿½ÉÕ“Ë‚ï¿½ï¿½ï¿½ï¿½ï¿½
         {
-            if (hit.collider.CompareTag("Card")) // ƒ^ƒO‚ğ”äŠr
+            if (hit.collider.CompareTag("Card")) // ï¿½^ï¿½Oï¿½ï¿½ï¿½r
             {
-                //tofKing = true;
 
-                // À•W‚ğæ“¾
-                Vector3 cardPos = tofPic.transform.localPosition;      // HoloLens2‚©‚çARƒJ[ƒh‚Ü‚Å‚ÌƒxƒNƒgƒ‹
-                Vector3 sensorPos = tofCamera.transform.localPosition;  // HoloLens2‚©‚çToFƒZƒ“ƒT‚Ü‚Å‚ÌƒxƒNƒgƒ‹
-                Vector3 sensorToCard = Vector3.Normalize(cardPos - sensorPos); // ToFƒZƒ“ƒT‚©‚çARƒJ[ƒh‚Ü‚Å‚Ì³‹K‰»ƒxƒNƒgƒ‹
+                // ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½æ“¾
+                Vector3 cardPos = tofPic.transform.localPosition;      // HoloLens2ï¿½ï¿½ï¿½ï¿½ARï¿½Jï¿½[ï¿½hï¿½Ü‚Å‚Ìƒxï¿½Nï¿½gï¿½ï¿½
+                Vector3 sensorPos = tofCamera.transform.localPosition;  // HoloLens2ï¿½ï¿½ï¿½ï¿½ToFï¿½Zï¿½ï¿½ï¿½Tï¿½Ü‚Å‚Ìƒxï¿½Nï¿½gï¿½ï¿½
+                Vector3 sensorToCard = Vector3.Normalize(cardPos - sensorPos); // ToFï¿½Zï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½ARï¿½Jï¿½[ï¿½hï¿½Ü‚Å‚Ìï¿½ï¿½Kï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½
 
-                /* ƒZƒ“ƒT‚ÆARƒJ[ƒh‚Ì‹——£‚ğæ“¾ */
+                /* ï¿½Zï¿½ï¿½ï¿½Tï¿½ï¿½ARï¿½Jï¿½[ï¿½hï¿½Ì‹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾ */
                 float disSentoCard = float.Parse(text);
 
-                // HoloLens2‚©‚çARƒJ[ƒh‚Ü‚Å‚ÌƒxƒNƒgƒ‹
+                // HoloLens2ï¿½ï¿½ï¿½ï¿½ARï¿½Jï¿½[ï¿½hï¿½Ü‚Å‚Ìƒxï¿½Nï¿½gï¿½ï¿½
                 cardPos = sensorPos + sensorToCard * disSentoCard;
             }
         }
-        /*else if (tofKing)
-        {
-            tofKing = false;
-        }*/
-
     }
 }
 
